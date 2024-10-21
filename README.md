@@ -50,5 +50,6 @@ Install necessary packages for mounting (Windows) network folders:
 
 Make new local directories to link to network folders:
 
-    sudo mkdir /mnt/myserver
+    sudo mkdir /mnt/server-1
     sudo mkdir /mnt/Flash
+    sudo mkdir /mnt/Windows
