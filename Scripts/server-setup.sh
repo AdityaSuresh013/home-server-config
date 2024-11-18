@@ -55,3 +55,11 @@ read -p "Enter the username to add to the sudo group: " username
 
 # Add user to sudo group
 add_user_to_sudo "$username"
+
+# Update and upgrade the system
+echo "Updating and upgrading the system..."
+sudo apt update > /dev/null && sudo apt upgrade -y > /dev/null
+
+echo "Local IP Address is : "
+ip addr | awk '/inet / && !/127.0.0.1/ {print $2; exit}' | cut -d/ -f1
+sleep 5
