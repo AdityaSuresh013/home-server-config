@@ -1,6 +1,6 @@
-# home-server-config
+# Debian Server Setup
 
-#### Operating system (Debian 8 Jessie) install
+#### Operating system (Debian 12) install
 
 Steps followed to install Debian 12 (stable) and base software on a server. Workstation is a Dell system, with 4 GB RAM, 1 TB HDD, and Intel i5-4440 3.3 GHz Quad-core.
 
@@ -53,3 +53,20 @@ Make new local directories to link to network folders:
     sudo mkdir /mnt/server-1
     sudo mkdir /mnt/Flash
     sudo mkdir /mnt/Windows
+
+Configure for static networking:
+- Edit /etc/network/interfaces to set static networking and reboot (in this case note that ens3 is the network device name)
+   
+ ```bash
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+auto ens33
+iface ens33 inet static
+    address 192.168.1.100
+    netmask 255.255.255.0
+    gateway 192.168.1.1
+    dns-nameservers 1.1.1.1 1.0.0.1 192.168.1.100
+```
