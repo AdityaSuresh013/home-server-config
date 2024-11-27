@@ -63,3 +63,25 @@ sudo apt update > /dev/null && sudo apt upgrade -y > /dev/null
 echo "Local IP Address is : "
 ip addr | awk '/inet / && !/127.0.0.1/ {print $2; exit}' | cut -d/ -f1
 sleep 5
+
+# =========================================
+#         Install Essential Packages
+# =========================================
+
+echo "Installing essential packages"
+sudo apt install nala
+sudo nala install -y \
+    neofetch htop btop curl wget tree git ranger jp2a tty-clock exa \
+    ffmpeg net-tools python3-pip python3-virtualenv zip unzip cifs-utils tor
+
+sudo nala install docker.io docker-compose -y
+sudo systemctl start docker
+sudo systemctl enable docker
+
+# =========================================
+#         Docker Containers
+# =========================================
+
+# Add user to docker group
+sudo usermod -aG docker "$username"
+echo ""$username" has been added to the docker group successfully."
