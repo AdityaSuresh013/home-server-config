@@ -70,3 +70,27 @@ iface ens33 inet static
     gateway 192.168.1.1
     dns-nameservers 1.1.1.1 1.0.0.1 192.168.1.100
 ```
+#### Backup using cron:
+Edit the cron jobs for the root user, run the following command:
+```bash
+sudo crontab -e
+```
+
+Back up a directory /path/to/source to /path/to/backup using tar at 2:00 AM every day, add the following line to your crontab:
+```bash
+0 2 * * * tar -czf /path/to/backup/backup_$(date +\%F_\%T).tar.gz -C /path/to/source .
+```
+Back up /path/to/source to a remote server at 2:00 AM every day, use the following scp method:
+```bash
+0 2 * * * tar -czf - -C /path/to/source . | ssh user@remote-server.com 'cat > /path/to/remote/backup/backup_$(date +\%F_\%T).tar.gz'.
+```
+
+Incremental backups, use rsync, which only copies modified files. Back up files to a remote server:
+```bash
+0 2 * * * rsync -av --delete /path/to/source/ user@remote-server.com
+```
+
+Clean up old backups (e.g., delete backups older than 7 days, run at 3:00 AM every day):
+```bash
+0 3 * * * find /path/to/backup/ -type f -name "*.tar.gz" -mtime +7 -exec rm {} \;
+```
