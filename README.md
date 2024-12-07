@@ -54,6 +54,21 @@ Make new local directories to link to network folders:
     sudo mkdir /mnt/Flash
     sudo mkdir /mnt/Windows
 
+Since network folders require authentication, create a credentials text file with the following lines:
+
+    username=*******
+    password=*******
+    domain=audi.server.xyz
+
+Network folders can be mounted using the following commands:
+
+    sudo mount.cifs //MyPC/data/server-1 /mnt/server-1 -o credentials=/path/to/file,uid=user1,gid=user1
+    sudo mount.cifs //MyPC/data/Flash /mnt/Flash -o credentials=/path/to/file,uid=user1,gid=user1
+
+To load network folder for the lab on computer startup, add the following line to `/etc/fstab` (Note that permissions are restricted to only the user marked in `uid=` through the use of `dir_mode=0700`:
+
+    //MyPC/data/server-1 /mnt/server-1 cifs credentials=/path/to/file,uid=user1,rw,dir_mode=0700 0 0
+
 Configure for static networking:
 - Edit /etc/network/interfaces to set static networking and reboot (in this case note that ens3 is the network device name)
    
