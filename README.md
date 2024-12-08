@@ -1,5 +1,12 @@
 # Debian Server Setup
 
+### Table of Contents
+
+- [Operating system install](#operating-system-install)
+- [User setup and management](#user-setup-and-management)
+- [Set up networking](#set-up-networking)
+- [Backup using cron](#backup-using-cron)
+
 #### Operating system (Debian 12) install
 
 Steps followed to install Debian 12 (stable) and base software on a server. Workstation is a Dell system, with 4 GB RAM, 1 TB HDD, and Intel i5-4440 3.3 GHz Quad-core.
